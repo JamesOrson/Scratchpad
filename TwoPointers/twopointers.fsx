@@ -1,18 +1,18 @@
 let search target l =
   let rec _search target length original reversed left right = 
-    let _is_same_index length left right = left = length - right - 1
-    if _is_same_index length left right then
+    let isSameIndex length left right = left = length - right - 1
+    if left = length - right - 1 then
       None
     else
       match original with
       | x :: xs ->
         match reversed with
           | y :: ys -> 
-            let _curried_search = _search target length
+            let curriedSearch = _search target length
             match x + y with
             | sum when sum = target -> Some(left, length - right - 1)
-            | sum when sum > target -> _curried_search original ys left (right + 1)
-            | sum when sum < target -> _curried_search xs reversed (left + 1) right
+            | sum when sum > target -> curriedSearch original ys left (right + 1)
+            | sum when sum < target -> curriedSearch xs reversed (left + 1) right
             | _ -> None
           | _ -> None
 
